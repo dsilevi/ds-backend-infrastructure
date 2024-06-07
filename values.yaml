@@ -1,0 +1,6 @@
+#
+# Repository structure:
+# environment /
+#              cluster (default?) /
+#                                  namespace /
+#                                             release
