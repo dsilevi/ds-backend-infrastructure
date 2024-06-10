@@ -1,3 +1,58 @@
 #
 # List of applications to deploy with ArgoCD
 #
+resources:
+  - apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: istio-base
+      namespace: argocd
+      labels:
+        name: istio-base
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/dsilevi/ds-backend-infrastructure.git"
+        # repoURL: "https://istio-release.storage.googleapis.com/charts"
+        targetRevision: HEAD
+        # targetRevision: "1.22.1"
+        path: "environment/default/istio-system/base"
+        # chart: "base"
+        helm:
+          valueFiles:
+            - values.yaml
+          parameters:
+            - name: repo
+              value: "https://istio-release.storage.googleapis.com/charts"
+            - name: chart
+              value: "base"
+            - name: version
+              value: "1.22.1"
+          releaseName: "istio-base"
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: istio-system
+      info:
+        - name: "Istio system base CRDs"
+          value: ""
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+        - CreateNamespace=true
+#        managedNamespaceMetadata:
+#          labels:
+#            any: label
+#            you: like
+#          annotations:
+#            the: same
+#            applies: for
+#            annotations: on-the-namespace
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
