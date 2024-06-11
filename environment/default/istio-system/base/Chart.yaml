@@ -1,5 +1,0 @@
-#
-name: base
-sources:
-- https://istio-release.storage.googleapis.com/charts
-version: 1.22.1
