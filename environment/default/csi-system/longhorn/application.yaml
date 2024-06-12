@@ -2,9 +2,9 @@
 # List of applications to deploy with ArgoCD
 #
 backendRepo: "https://dsilevi.github.io/ds-backend-infrastructure"
-appRepo: "https://charts.longhorn.io"
+appRepo: "https://dsilevi.github.io/ds-helm-charts"
 appBaseVersion: "1.6.2"
-appBaseChart: "longhorn"
+appBaseChart: "longhorn-custom"
 appBaseName: "longhorn"
 appBasePath: "environment/default/csi-system/longhorn"
 appNamespace: "csi-system"
