@@ -1,0 +1,14 @@
+#
+# List of applications to deploy with ArgoCD
+#
+backendRepo: "https://dsilevi.github.io/ds-backend-infrastructure"
+appRepo: "https://prometheus-community.github.io/helm-charts"
+appBaseVersion: "25.21.0"
+appBaseChart: "prometheus"
+appBaseName: "prometheus"
+appBasePath: "environment/default/log-system/prometheus"
+appNamespace: "log-system"
+appValueFiles:
+  - values.yaml
+project: "default"
+server: "https://kubernetes.default.svc"
